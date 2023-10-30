@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tambahkan library Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+
+</head>
+</head>
+<body class="bg-black">
+  <div class=" text-xl bg-slate-700 text-white m-6 rounded-md flex  align-center justify-center h-14 items-center">
+    <p class="font-semibold">Selamat datang di</p>
+    <p class="text-amber-300 font-semibold"> Fikom UMI</p>
+  </div>
+  <div class="flex justify-center bg-amber-100 h-2/5">
+    <img src="fikom.jpeg" alt="fikom ig" class="rounded-xl m-3">
+  </div>
+  <!-- moto -->
+  <div class="flex justify-center flex-wrap mt-9">
+    <div class="text-white font-semibold w-96" >
+        <span class="text-amber-300">"</span>Kombinasi ilmu pengetahuan dan nilai-nilai keislaman di <span class="text-amber-300">Fakultas Ilmu Komputer</span> membentuk karakter berintegritas, kreatif, dan inovatif <span class="text-amber-300">Anda</span> dalam lingkungan belajar kondusif. Kembangkan potensi Anda di sini.<span class="text-amber-300">"</span>
+    </div>
+  </div>
+  <div class="m-5 rounded-xl flex justify-center">
+    <img src="peringkat.jpeg" alt="">
+  </div>
+  <!-- news -->
+  <div class="news font-bold text-white m-5 flex justify-center">
+    NEWS
+  </div>
+  <div class="text-white flex m-5 bg-stone-900 justify-center" >
+    <div class="gambar m-4 ">
+        <img src="student-exchange.jpeg" alt="foto student exhange" class="w-6/12 rounded-xl">
+    </div>
+    <div class="textnews  mt-6">
+        <p class="font-semibold">
+            Student Exchange Fikom to Kyutech Japan
+            Spring Semester – 2024
+        </p>
+        <p class="mt-3">
+            Kerjasama antara Kyushu Institute of Technology dan FIKOM UMI membuka kesempatan bagi Mahasiswa FIKOM pada program Pertukaran Pelajar [Kuliah & Riset Lab.] ke negeri sakura yang penuh pesona, JAPAN <br>
+            <button class="italic text-cyan-300" id="openButton1">Selengkapnya</button>
+        </p>
+    </div>
+  </div>
+  <div class="text-white flex m-5 bg-stone-900 justify-center" >
+    <div class="gambar m-4 ">
+        <img src="sertifikasi.jpeg" alt="foto student exhange" class="w-6/12 rounded-xl">
+    </div>
+    <div class="textnews  mt-6">
+        <p class="font-semibold">
+            Student Exchange Fikom to Kyutech Japan
+            Spring Semester – 2024
+        </p>
+        <p class="mt-3">
+            Kerjasama antara Kyushu Institute of Technology dan FIKOM UMI membuka kesempatan bagi Mahasiswa FIKOM pada program Pertukaran Pelajar [Kuliah & Riset Lab.] ke negeri sakura yang penuh pesona, JAPAN <br>
+            <button class="italic text-cyan-300" id="openButton2">Selengkapnya</button>
+        </p>
+    </div>
+  </div>
+  <!-- Location -->
+  <div class="lokasi flex text-white font-semibold justify-center m-5">
+    LOCATION
+  </div>
+  <div class="flex justify-center m-6 mb-20">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d993.4492152951287!2d119.44876106962974!3d-5.136384653755903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbefd3165008369%3A0x7af75b8baf265f2b!2sFakultas%20Ilmu%20Komputer%20UMI!5e0!3m2!1sid!2sid!4v1698633338521!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-xl"></iframe>
+  </div>
+  <div class="footer bg-stone-800 text-white font-semibold flex justify-center p-6">
+    Thank Your for Open this Website : )
+  </div>
+
+  <!-- pop up -->
+  <div id="myModal" class="hidden fixed inset-0 flex items-center justify-center z-50 ">
+    <div class="modal-container w-9/12 h-2/4 p-4 rounded shadow-lg bg-gray-300  ">
+      <!-- Isi Form -->
+      <button id="closeModal" class="text-red-500 hover:text-red-700 text-right text-lg cursor-pointer flex ">Tutup</button>
+      <div class="flex justify-center items-center flex-col h-3/4">
+          <div class="mb-2">
+            untuk melihat lebih lanjut Anda perlu login terlebih dahulu
+          </div>
+          <div class="  font-semibold ">
+            <button class="bg-stone-700 p-4 text-white rounded-xl" onclick="signInWithGoogle()">MASUK DENGAN GOOGLE</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js"></script>
+  <script>
+    // Dapatkan elemen modal dan tombol tutup
+const modal = document.getElementById('myModal');
+const closeModal = document.getElementById('closeModal');
+
+// Fungsi untuk menampilkan modal
+function openModal() {
+  modal.classList.remove('hidden');
+}
+
+// Fungsi untuk menyembunyikan modal
+function hideModal() {
+  modal.classList.add('hidden');
+}
+
+// Tambahkan event listener untuk tombol
+openButton1.addEventListener('click', openModal);
+openButton2.addEventListener('click', openModal);
+closeModal.addEventListener('click', hideModal);
+
+// login
+// Konfigurasi Firebase
+const firebaseConfig = {
+      apiKey: 'BD85ozB3tGLGLAclApyMiEkPZcJ2zamcTlHMxd8vUWKgGrf1AuXCw7H-Pm3OeJadFPhnf0bPnmRgs97pP5-NGZI',
+      authDomain: 'login.firebaseapp.com',
+      projectId: 'login-32207.firebaseapp.com',
+    };
+
+    // Inisialisasi Firebase
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
+    const auth = firebaseApp.auth();
+
+    // Fungsi untuk login dengan Google
+    function signInWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          console.log('Login berhasil: ' + user.displayName);
+        })
+        .catch((error) => {
+          console.error('Login gagal: ' + error.message);
+        });
+    }
+
+  </script>
+</body>
+</html>
